@@ -1,0 +1,23 @@
+name: Zip Repository and Upload Artifact
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  zip-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Zip repository contents
+        run: zip -r repo.zip .
+
+      - name: Upload zip as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: repository-archive
+          path: repo.zip
